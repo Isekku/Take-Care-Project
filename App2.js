@@ -1,13 +1,9 @@
 // Imports
 import * as React from 'react';
-import { Text, View, Button, TouchableOpacity, TextInput, Linking, StyleSheet } from 'react-native';
+import { Text, View, Button, TouchableOpacity, TextInput, Linking } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import DropScreen from './components/DropScreen';
-import SignInScreen from './components/SignInScreen';
-import SignUpChoose from './components/SignUpChoose';;
 
 const Stack = createStackNavigator();
 
@@ -34,14 +30,54 @@ export default function App() {
       <Stack.Screen name="Inscription Med" component={SignUpScreen_Med_one} />
       <Stack.Screen name="Inscription Med 2" component={SignUpScreen_Med_two} />
       <Stack.Screen name="Inscription Med 3" component={SignUpScreen_Med_three} />
+
+
     </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
+//Écran sur lequel on arrive la première fois qu'on ouvre l'appli
+function DropScreen({ navigation }) {
+  return (
+    <View>
+    <Button  title = "Inscription" onPress={() => navigation.navigate("Choix Inscription")}/>
+    <Button title = "Connexion " onPress={() => navigation.navigate("Connexion")}/>
+    </View>
+  );
+}
+
+//Écran de connxeion
+//Le texte clickable ne s'affiche pas pour le moment, ça doit être le style qui pose problème, à voir, le texte redirige vers google, le temps qu'on trouve comment faire
+//pour le bouton Goback pour le moemnt on le laisse comme ça, on attend qu"lles nous envoient l'image pour qu'on l'implémente
+//Les textes ne se voient pas, à régler
+function SignInScreen({ navigation }) {
+  return (
+    <View>
+    <Text Connexion/>
+    <TextInput placeholder = "Adreese mail"/>
+    <TextInput placeholder = "Mot de passe" secureTextEntry={true}/>
+    <Text Mot de passe oublié onPress={ ()=> Linking.openURL('https://google.com') }/>
+    <Button title = "Se connecter" onPress={() => navigation.navigate("Acceuil")}/>
+    <Button title = "Go back" onPress={() => navigation.goBack()}/>
+    </View>
+  );
+}
+
+
 //Écran d'inscription (il y en aura plusieurs)
 //Les écrans SignUp_X sont dan sl'ordre de la maquette, on différenciera avec les écrans médecin.
-
+function SignUpChoose({ navigation }) {
+  return (
+    <View>
+    <Text Inscription/>
+    <Button title = "Patient" onPress={() => navigation.navigate("Inscription")}/>
+    <Button  title = "Médecin" onPress={() => navigation.navigate("Inscription Med")}/>
+    <Button title = "Go back" onPress={() => navigation.goBack()}/>
+    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription 2")}/>
+    </View>
+  );
+}
 function SignUpScreen_one({ navigation }) {
   return (
     <View>
@@ -169,5 +205,4 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
-
 
