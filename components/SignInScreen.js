@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   },
   connexionText :{
     textAlign: "center",
+    fontSize: 15,
   },
 
   forgotText : {
