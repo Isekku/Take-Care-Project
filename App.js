@@ -39,7 +39,7 @@ export default function App() {
   );
 }
 
-//Écran d'inscription (il y en aura plusieurs)
+//Écran d'inscription utilisateur.
 //Les écrans SignUp_X sont dan sl'ordre de la maquette, on différenciera avec les écrans médecin.
 
 function SignUpScreen_one({ navigation }) {
