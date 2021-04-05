@@ -11,19 +11,20 @@ import SignInScreen from './SignInScreen';
 export default function DropScreen({ navigation }) {
   return (
     <View>
+      <View>
       <Image
-      style={styles.Logo}
-      source={{
-        uri: 'https://reactnative.dev/img/tiny_logo.png'
-      }}
+      style={styles.tclogo}
+      source={require("../assets/logo_tc_png.png")}
       />
+      </View>
       <TouchableOpacity style={styles.SignUpB} onPress={() => navigation.navigate("Choix Inscription")}>
-        <Text style={styles.signUpText}>Inscription</Text>
+        <Text style={styles.signText}>Inscription</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.SignInB} onPress={() => navigation.navigate("Connexion")}>
-        <Text style={styles.signInText}>Connexion</Text>
+        <Text style={styles.signText}>Connexion</Text>
       </TouchableOpacity>
+      
     </View>
   );
 }
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent : 'center',
     padding: 40,
-    marginTop:"100%",
+    marginTop:"60%",
     marginLeft : "15%",
     marginRight : "15%",
     borderRadius:50,
@@ -59,13 +60,18 @@ const styles = StyleSheet.create({
     borderColor: "#84F8CD",
   },
 
-  signUpText : {
-    fontSize: 20,
+  signText : {
+    fontSize: 23,
     color: "#72807B",
   },
 
-  signInText : {
-    fontSize: 20,
-    color: "#72807B",
+  tclogo: {
+    position: "relative",
+    left: "26%",
+    top: 200,
+    width: 200,
+    height: 170,
+    justifyContent : 'center',
+    alignItems : 'center'
   }
 });
