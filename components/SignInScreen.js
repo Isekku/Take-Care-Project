@@ -11,15 +11,15 @@ import DropScreen from './DropScreen'
 //Faut remettre la nav
 function SignInScreen({ navigation }) {
   return (
-    <View>
+    <View style={styles.view}>
   
     <Text style={styles.TextLog}>Connexion</Text>
 
-    <TextInput placeholder = "Adreese mail" style = {styles.EmailInput}/>
+    <TextInput placeholder = "Adresse mail" style = {styles.EmailInput}/>
     <TextInput placeholder = "Mot de passe" secureTextEntry={true} style = {styles.PasswordInput}/>
     
     <TouchableOpacity style={styles.SignInB} onPress={() => navigation.goBack()}>
-        <Text>Connexion</Text>
+        <Text style={styles.connexionText}> Se connecter</Text>
       </TouchableOpacity>
 
     </View>
@@ -31,41 +31,49 @@ export default SignInScreen;
 
 
 const styles = StyleSheet.create({
+  view : {
+    flex: 1
+  },
+
   TextLog : {
     fontSize: 50,
-    color: "#000",
+    color: "#717171",
     textAlign: 'center', 
     marginTop : "60%"
   }, 
   EmailInput : {
-        textAlign: 'center',
+        textAlign: 'left',
+        fontSize : 20,
         marginTop : "30%", 
-        backgroundColor : '#21F3A6',
+        backgroundColor : '#84F8CD',
         marginLeft : "10%",
         marginRight : "10%",
-        padding :10,
-        borderRadius : 30
+        padding :20,
+        borderRadius : 50
   },
   PasswordInput : {
-    textAlign: 'center',
+        textAlign: 'left',
+        fontSize: 20,
         marginTop : "10%", 
-        backgroundColor : '#21F3A6',
+        backgroundColor : '#84F8CD',
         marginLeft : "10%",
         marginRight : "10%",
-        padding :10,
-        borderRadius : 30
+        padding :20,
+        borderRadius : 50
   },
   SignInB : {
     textAlign: 'center',
     justifyContent : 'center',
     marginTop : "10%", 
-    backgroundColor : '#21F3A6',
+    backgroundColor : '#BEFBE5',
     marginLeft : "30%",
     marginRight : "30%",
-    padding :10,
+    padding :20,
     borderRadius : 30
+  },
+  connexionText :{
+    textAlign: "center"
   }
-
 
   
 
