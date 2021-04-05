@@ -17,11 +17,18 @@ function SignInScreen({ navigation }) {
 
     <TextInput placeholder = "Adresse mail" style = {styles.EmailInput}/>
     <TextInput placeholder = "Mot de passe" secureTextEntry={true} style = {styles.PasswordInput}/>
-    
+
+
+    <TouchableOpacity style={styles.passwordForgot} onPress={() => navigation.goBack()}>
+      <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
+    </TouchableOpacity>
+
+
     <TouchableOpacity style={styles.SignInB} onPress={() => navigation.goBack()}>
         <Text style={styles.connexionText}> Se connecter</Text>
       </TouchableOpacity>
 
+    
     </View>
 
   );
@@ -65,16 +72,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent : 'center',
     marginTop : "10%", 
-    backgroundColor : '#BEFBE5',
+    backgroundColor : '#84F8CD',
     marginLeft : "30%",
     marginRight : "30%",
     padding :20,
-    borderRadius : 30
+    borderRadius : 30,
   },
   connexionText :{
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 
+  forgotText : {
+    marginTop: 20,
+    fontSize: 20,
+    color : "#8E8E8E",
+    position : "relative",
+    left : 160,
+  }
   
 
   
