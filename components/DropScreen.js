@@ -1,11 +1,5 @@
 import * as React from 'react';
-import { Text, View, Button, TouchableOpacity, TextInput, Linking, StyleSheet, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
-
-import SignInScreen from './SignInScreen';
-
-
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 //Écran sur lequel on arrive la première fois qu'on ouvre l'appli
 function DropScreen({ navigation }) {

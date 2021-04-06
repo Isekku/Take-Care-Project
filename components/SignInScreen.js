@@ -1,11 +1,5 @@
 import * as React from 'react';
-import { Text, View, Button, TouchableOpacity, TextInput, Linking, StyleSheet, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import DropScreen from './DropScreen'
-
+import { Text, View, TouchableOpacity, TextInput, StyleSheet, } from 'react-native';
 
 //TouchableOpacity = Bouton
 //Faut remettre la nav

@@ -1,12 +1,6 @@
 // Imports
 import * as React from 'react';
-import { Text, View, Button, TouchableOpacity, TextInput, Linking, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
-import { createStackNavigator } from '@react-navigation/stack';
-
-import DropScreen from './DropScreen'
-import SignInScreen from './SignInScreen'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
 function SignUpChoose({ navigation }) {
   return (
