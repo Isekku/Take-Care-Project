@@ -9,6 +9,13 @@ import SignInScreen from './components/SignInScreen';
 import SignUpChoose from './components/SignUpChoose';
 import SignUpScreen_one from './components/SignUpScreen_one';
 import DropScreen from './components/DropScreen';
+import SignUpScreen_Med_one from './components/SignUpScreen_Med_one';
+import SignUpScreen_two from './components/SignUpScreen_two';
+import SignUpScreen_Med_two from './components/SignUpScreen_Med_two';
+import SignUpScreen_three from './components/SignUpScreen_three';
+import SignUpScreen_Med_three from './components/SignUpScreen_Med_three';
+import SignUpScreen_four from './components/SignUpScreen_four';
+import SignUpScreen_five from './components/SignUpScreen_five';
 
 const Stack = createStackNavigator();
 
@@ -42,111 +49,10 @@ export default function App() {
 
 //Écran d'inscription utilisateur.
 //Les écrans SignUp_X sont dan sl'ordre de la maquette, on différenciera avec les écrans médecin.
-function SignUpScreen_two({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
 
-    <TextInput placeholder = "Adresse mail"/>
-    <TextInput placeholder = "Mot de passe" secureTextEntry={true}/>
-    <TextInput placeholder = "Confirmer le mot de passe" secureTextEntry={true}/>
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription 3")}/>
-    </View>
-  );
-}
-
-function SignUpScreen_three({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "Taille"/>
-    <TextInput placeholder = "Poids"/>
-    <TextInput placeholder = "Date de naissance"/>
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription 4")}/>
-    </View>
-  );
-}
 //Franchement je ne vois pas l'utilité de cet écran mais soit
-function SignUpScreen_four({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "Lieu de vie"/>
-    <TextInput placeholder = "Lieu de vie"/>
-    <Text Pratique sportive   Fréquence />
-    <TextInput />
-    <TextInput />
-
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription 5")}/>
-    </View>
-  );
-}
-function SignUpScreen_five({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "Nom du médecin"/>
-    <TextInput placeholder = "Numéro de téléphone"/>
-    <TextInput placeholder = "Adresse"/>
-    <Text Pratique sportive   Fréquence />
-    <TextInput />
-    <TextInput />
-
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Terminé" onPress={() => navigation.goBack()}/>
-    </View>
-  );
-}
-
 
 //Inscription des médecins, même fonctionnement
-function SignUpScreen_Med_one({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "Nom"/>
-    <TextInput placeholder = "Prénom"/>
-    <TextInput placeholder = "Sexe"/>
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription Med 2")}/>
-    </View>
-  );
-}
-
-function SignUpScreen_Med_two({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "Adresse mail"/>
-    <TextInput placeholder = "Mot de passe" secureTextEntry={true}/>
-    <TextInput placeholder = "Confirmer le mot de passe" secureTextEntry={true}/>
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription Med 3")}/>
-    </View>
-  );
-}
-function SignUpScreen_Med_three({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "N° Ordre des médecins"/>
-    <TextInput placeholder = "N° de téléphone"/>
-    <TextInput placeholder = "Discipline"/>
-    <TextInput placeholder = "Adresse du cabinet"/>
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription")}/>
-    </View>
-  );
-}
 //pour le moment on a ni les boutons, ni les images donc il y a rien
 function HomeScreen({ navigation }) {
   return (
