@@ -5,9 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import DropScreen from './components/DropScreen';
 import SignInScreen from './components/SignInScreen';
-import SignUpChoose from './components/SignUpChoose';;
+import SignUpChoose from './components/SignUpChoose';
+import SignUpScreen_one from './components/SignUpScreen_one';
+import DropScreen from './components/DropScreen';
 
 const Stack = createStackNavigator();
 
@@ -41,20 +42,6 @@ export default function App() {
 
 //Écran d'inscription utilisateur.
 //Les écrans SignUp_X sont dan sl'ordre de la maquette, on différenciera avec les écrans médecin.
-
-function SignUpScreen_one({ navigation }) {
-  return (
-    <View>
-    <Text Inscription/>
-
-    <TextInput placeholder = "Nom"/>
-    <TextInput placeholder = "Prénom"/>
-    <TextInput placeholder = "Sexe"/>
-    <Button title = "Go back" onPress={() => navigation.goBack()}/>
-    <Button title = "Go forward" onPress={() => navigation.navigate("Inscription 2")}/>
-    </View>
-  );
-}
 function SignUpScreen_two({ navigation }) {
   return (
     <View>

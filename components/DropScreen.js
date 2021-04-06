@@ -8,7 +8,7 @@ import SignInScreen from './SignInScreen';
 
 
 //Écran sur lequel on arrive la première fois qu'on ouvre l'appli
-export default function DropScreen({ navigation }) {
+function DropScreen({ navigation }) {
   return (
     <View>
       <View>
@@ -29,6 +29,8 @@ export default function DropScreen({ navigation }) {
   );
 }
 
+
+export default DropScreen;
 
 
 const styles = StyleSheet.create({
