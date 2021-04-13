@@ -1,8 +1,6 @@
 // Imports
 import * as React from 'react';
-import { Text, View, Button, TouchableOpacity, TextInput, Linking, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import SignInScreen from './components/SignInScreen';
@@ -16,6 +14,9 @@ import SignUpScreen_three from './components/SignUpScreen_three';
 import SignUpScreen_Med_three from './components/SignUpScreen_Med_three';
 import SignUpScreen_four from './components/SignUpScreen_four';
 import SignUpScreen_five from './components/SignUpScreen_five';
+import HomeScreen from './components/HomeScreen';
+
+
 
 const Stack = createStackNavigator();
 
@@ -28,11 +29,10 @@ export default function App() {
   return (
 
     <NavigationContainer>
-    <Stack.Navigator initialRouteName = "" screenOptions={{headerShown:false }}
->
+    <Stack.Navigator initialRouteName = "" screenOptions={{headerShown:false }}>
       <Stack.Screen name="DropScreen" component={DropScreen} />
       <Stack.Screen name="Connexion" component={SignInScreen} />
-      <Stack.Screen name="Acceuil" component={HomeScreen} />
+      <Stack.Screen name="Accueil" component={HomeScreen} />
       <Stack.Screen name="Choix Inscription" component={SignUpChoose} />
       <Stack.Screen name="Inscription" component={SignUpScreen_one} />
       <Stack.Screen name="Inscription 2" component={SignUpScreen_two} />
@@ -54,13 +54,5 @@ export default function App() {
 
 //Inscription des médecins, même fonctionnement
 //pour le moment on a ni les boutons, ni les images donc il y a rien
-function HomeScreen({ navigation }) {
-  return (
-    <View>
-    <Text rien pour le moment/>
-    <Button title = "go back" onPress={() => navigation.goBack()}/>
-    </View>
-  );
-}
 
 

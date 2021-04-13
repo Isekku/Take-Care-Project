@@ -45,15 +45,15 @@ function SignUpScreen_three({ navigation }) {
     },
 
     styleText : {
-      backgroundColor : "#84F8CD",
-      marginTop: '5%',
-      padding : 20,
-      borderRadius: 100,
-      fontSize: 20,
-      width: 350,
-      position: "relative",
-      left: '8%',
-      color: "#707070",
+      textAlign: 'center',
+        marginTop : "5%", 
+        backgroundColor : '#84F8CD',
+        marginLeft : "10%",
+        marginRight : "10%",
+        padding :20,
+        borderRadius : 100,
+        color: "#707",
+        fontSize: 20,
     },
 
     textinputView : {

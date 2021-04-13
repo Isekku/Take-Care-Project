@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet, Linking} from 'react-native';
 
 //TouchableOpacity = Bouton
 //Faut remettre la nav
@@ -13,12 +13,12 @@ function SignInScreen({ navigation }) {
     <TextInput placeholder = "Mot de passe" secureTextEntry={true} style = {styles.PasswordInput}/>
 
 
-    <TouchableOpacity style={styles.passwordForgot} onPress={() => navigation.goBack()}>
+    <TouchableOpacity style={styles.passwordForgot}  onPress={ ()=> Linking.openURL('https://google.com/')}>
       <Text style={styles.forgotText}>Mot de passe oublié ?</Text>
     </TouchableOpacity>
 
 
-    <TouchableOpacity style={styles.SignInB} onPress={() => navigation.goBack()}>
+    <TouchableOpacity style={styles.SignInB} onPress={() => navigation.navigate("Accueil")}>
         <Text style={styles.connexionText}> Se connecter</Text>
       </TouchableOpacity>
 
