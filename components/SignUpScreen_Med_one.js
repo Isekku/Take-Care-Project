@@ -24,14 +24,7 @@ function SignUpScreen_Med_one({ navigation }) {
       <TextInput placeholder = "Prénom" style={styles.styleText}/>
       <TextInput placeholder = "Sexe" style={styles.styleText}/>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("Inscription Med 2")} style={styles.goInscriptionButton}> 
-      <View>
-        <Image
-        style={styles.goInscriptionArrow}
-        source={require("../assets/fleche_avant.png")}
-        />
-      </View>
-      </TouchableOpacity>
+
       
       </View>
     );

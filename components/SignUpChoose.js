@@ -1,6 +1,8 @@
 // Imports
 import * as React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import SignUpScrollview from './SignUpScrollview'
+import SignUpScrollMedview from './SignUpScrollMedview'
 
 function SignUpChoose({ navigation }) {
   return (
@@ -8,12 +10,12 @@ function SignUpChoose({ navigation }) {
     <Text style={styles.signUpText}>S'inscrire en tant que :</Text>
 
     <View style={styles.buttonView}>
-    <TouchableOpacity  title = "Médecin" onPress={() => navigation.navigate("Inscription Med")} style={styles.Medecin}> 
+    <TouchableOpacity  title = "Médecin" onPress={() => navigation.navigate("Inscription Med scroll")} style={styles.Medecin}> 
     <Text style={styles.medecinText}>Médecin</Text>
     </TouchableOpacity>
 
 
-    <TouchableOpacity title = "Patient" onPress={() => navigation.navigate("Inscription")} style={styles.Patient}> 
+    <TouchableOpacity title = "Patient" onPress={() => navigation.navigate("Inscription scroll")} style={styles.Patient}> 
     <Text style={styles.patientText}>Patient</Text>
     </TouchableOpacity>
     </View>
