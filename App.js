@@ -15,6 +15,8 @@ import SignUpScreen_Med_three from './components/SignUpScreen_Med_three';
 import SignUpScreen_four from './components/SignUpScreen_four';
 import SignUpScreen_five from './components/SignUpScreen_five';
 import HomeScreen from './components/HomeScreen';
+import SettingScreen from './components/SettingScreen';
+import AvatarScreen from './components/AvatarScreen';
 
 
 
@@ -42,6 +44,8 @@ export default function App() {
       <Stack.Screen name="Inscription Med" component={SignUpScreen_Med_one} />
       <Stack.Screen name="Inscription Med 2" component={SignUpScreen_Med_two} />
       <Stack.Screen name="Inscription Med 3" component={SignUpScreen_Med_three} />
+      <Stack.Screen name="Parametre" component={SettingScreen} />
+      <Stack.Screen name="Profil" component={AvatarScreen} />
     </Stack.Navigator>
     </NavigationContainer>
   );
