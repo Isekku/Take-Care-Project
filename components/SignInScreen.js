@@ -1,16 +1,125 @@
 import * as React from 'react';
-import { Text, View, TouchableOpacity, TextInput, StyleSheet, Linking} from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet, Linking, StatusBar, Alert} from 'react-native';
+import {AuthContext} from './context';
+import { useTheme } from 'react-native-paper';
+import Users from '../models/users';
 
 //TouchableOpacity = Bouton
 //Faut remettre la nav
-function SignInScreen({ navigation }) {
+const SignInScreen = ({ navigation }) => {
+
+  const [data, setData] = React.useState({
+    username: '',
+    password: '',
+    check_textInputChange: false,
+    secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
+});
+
+const { colors } = useTheme();
+
+const { signIn } = React.useContext(AuthContext);
+
+const textInputChange = (val) => {
+    if( val.trim().length >= 4 ) {
+        setData({
+            ...data,
+            username: val,
+            check_textInputChange: true,
+            isValidUser: true
+        });
+    } else {
+        setData({
+            ...data,
+            username: val,
+            check_textInputChange: false,
+            isValidUser: false
+        });
+    }
+}
+
+const handlePasswordChange = (val) => {
+    if( val.trim().length >= 8 ) {
+        setData({
+            ...data,
+            password: val,
+            isValidPassword: true
+        });
+    } else {
+        setData({
+            ...data,
+            password: val,
+            isValidPassword: false
+        });
+    }
+}
+
+const updateSecureTextEntry = () => {
+    setData({
+        ...data,
+        secureTextEntry: !data.secureTextEntry
+    });
+}
+
+const handleValidUser = (val) => {
+    if( val.trim().length >= 4 ) {
+        setData({
+            ...data,
+            isValidUser: true
+        });
+    } else {
+        setData({
+            ...data,
+            isValidUser: false
+        });
+    }
+}
+
+const loginHandle = (userName, password) => {
+
+    const foundUser = Users.filter( item => {
+        return userName == item.username && password == item.password;
+    } );
+
+    if ( data.username.length == 0 || data.password.length == 0 ) {
+        Alert.alert('Alerte !', 'Le pseudonyme et le mot de passe ne peuvent pas être vide.', [
+            {text: 'Ok'}
+        ]);
+        return;
+    }
+
+    if ( foundUser.length == 0 ) {
+        Alert.alert('Incorrect!', 'Pseudonyme ou mot de passe incorrect.', [
+            {text: 'Ok'}
+        ]);
+        return;
+    }
+    signIn(foundUser);
+}
   return (
     <View style={styles.view}>
   
     <Text style={styles.TextLog}>Connexion</Text>
 
-    <TextInput placeholder = "Adresse mail" style = {styles.EmailInput}/>
-    <TextInput placeholder = "Mot de passe" secureTextEntry={true} style = {styles.PasswordInput}/>
+    <TextInput 
+                    placeholder="Pseudonyme"
+                    placeholderTextColor="#666666"
+                    style={styles.EmailInput}
+                    autoCapitalize="none"
+                    onChangeText={(val) => textInputChange(val)}
+                    onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+                />
+
+    <TextInput 
+                    placeholder="Mot de passe"
+                    placeholderTextColor="#666666"
+                    secureTextEntry={data.secureTextEntry ? true : false}
+                    style={styles.PasswordInput}
+                    autoCapitalize="none"
+                    onChangeText={(val) => handlePasswordChange(val)}
+                />
+    
 
 
     <TouchableOpacity style={styles.passwordForgot}  onPress={ ()=> Linking.openURL('https://google.com/')}>
@@ -18,7 +127,7 @@ function SignInScreen({ navigation }) {
     </TouchableOpacity>
 
 
-    <TouchableOpacity style={styles.SignInB} onPress={() => navigation.navigate("Accueil")}>
+    <TouchableOpacity style={styles.SignInB} onPress={() => {loginHandle( data.username, data.password )}}>
         <Text style={styles.connexionText}> Se connecter</Text>
       </TouchableOpacity>
 

@@ -4,7 +4,12 @@ import { Image, View, TouchableOpacity, StyleSheet, Text, TouchableHighlight, } 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons'
 
+import { AuthContext } from './context';
+
 function SettingScreen({ navigation }) {
+
+    const { signOut } = React.useContext(AuthContext);
+
     return (
     <View style={styles.masterView}>
         <Button
@@ -88,7 +93,7 @@ function SettingScreen({ navigation }) {
         </TouchableOpacity>
 
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {signOut()}}>
         <ListItem bottomDivider>
             <ListItem.Content>
                 <ListItem.Title>Déconnexion</ListItem.Title>
