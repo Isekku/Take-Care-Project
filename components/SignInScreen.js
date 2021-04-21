@@ -9,7 +9,7 @@ import Users from '../models/users';
 const SignInScreen = ({ navigation }) => {
 
   const [data, setData] = React.useState({
-    username: '',
+    email: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
@@ -25,14 +25,14 @@ const textInputChange = (val) => {
     if( val.trim().length >= 4 ) {
         setData({
             ...data,
-            username: val,
+            email: val,
             check_textInputChange: true,
             isValidUser: true
         });
     } else {
         setData({
             ...data,
-            username: val,
+            email: val,
             check_textInputChange: false,
             isValidUser: false
         });
@@ -79,18 +79,18 @@ const handleValidUser = (val) => {
 const loginHandle = (userName, password) => {
 
     const foundUser = Users.filter( item => {
-        return userName == item.username && password == item.password;
+        return userName == item.email && password == item.password;
     } );
 
-    if ( data.username.length == 0 || data.password.length == 0 ) {
-        Alert.alert('Alerte !', 'Le pseudonyme et le mot de passe ne peuvent pas être vide.', [
+    if ( data.email.length == 0 || data.password.length == 0 ) {
+        Alert.alert('Alerte !', 'L\email et le mot de passe ne peuvent pas être vide.', [
             {text: 'Ok'}
         ]);
         return;
     }
 
     if ( foundUser.length == 0 ) {
-        Alert.alert('Incorrect!', 'Pseudonyme ou mot de passe incorrect.', [
+        Alert.alert('Incorrect!', 'Email ou mot de passe incorrect.', [
             {text: 'Ok'}
         ]);
         return;
@@ -103,7 +103,7 @@ const loginHandle = (userName, password) => {
     <Text style={styles.TextLog}>Connexion</Text>
 
     <TextInput 
-                    placeholder="Pseudonyme"
+                    placeholder="Email"
                     placeholderTextColor="#666666"
                     style={styles.EmailInput}
                     autoCapitalize="none"
@@ -127,7 +127,7 @@ const loginHandle = (userName, password) => {
     </TouchableOpacity>
 
 
-    <TouchableOpacity style={styles.SignInB} onPress={() => {loginHandle( data.username, data.password )}}>
+    <TouchableOpacity style={styles.SignInB} onPress={() => {loginHandle( data.email, data.password )}}>
         <Text style={styles.connexionText}> Se connecter</Text>
       </TouchableOpacity>
 
