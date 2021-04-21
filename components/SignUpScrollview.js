@@ -4,31 +4,51 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios'
 
+
+
 function SignUpScrollview({ navigation }) {
+  
   const [username_u, setUsername] =useState("")
   const [lastname_u, setLastname] =useState("")
   const [firstname_u, setFirstname] =useState("")
   const [sex_u, setSex] =useState("")
   const [email_u, setEmail] =useState("")
   const [password_u, setPassword] =useState("")
+  const [password_uv, setPasswordv] =useState("")
+  const [minstr, setMinstr] =useState("")
   const [birth_u, setBirth] =useState("")
   const [doctorcode_u, setDoctorcode] =useState("")
   const [phone_u, setPhone] =useState("")
   const [modalVisible, setModalVisible] = useState(false)
-  const set = 'profils'
- 
+  const [spellcheckusrn, setSpellcheckusrn] = useState(false)
+  const [passwcheck, setPasswcheck] = useState()
+  const [usrn, setUsrn] = useState()
+  const [signupvisible, setSignupvisible] = useState()
+  
 
-  const [pack, setPack] = useState({
-  username: {username_u},
-  firstname: {firstname_u},
-  lastname: {lastname_u},
-  email: {email_u},
-  birth: {birth_u},
-  password: {password_u},
-  phone:{phone_u},
-  sex:  {sex_u},
-  iddoctor: {doctorcode_u}
-  })
+  const specials=/[*|\":<>[\]{}`\\()'/;@&$,.]/;
+  const alpha = /[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789]/
+  const baseURL = 'http://takecare.southcentralus.cloudapp.azure.com/api'
+
+
+
+
+
+  function strtobe(strtob, strtotest){
+    strtob.test(strtotest) ? setSpellcheckusrn(false): setSpellcheckusrn(true)
+
+  }
+
+  function minstrtobe(str){
+    str.length < 5 ? setMinstr(true) : setMinstr(false)
+  }
+  
+  function passwchecker(passw, verifypassw){
+    passw != verifypassw ? setPasswcheck(true) : setPasswcheck(false)
+  }
+  function globalcheck(){
+    spellcheckusrn == false && minstr == false && passwcheck == false ? setSignupvisible(true): setSignupvisible(false)
+  }
 
     return (
       <SafeAreaView style={styles.container}>
@@ -38,15 +58,46 @@ function SignUpScrollview({ navigation }) {
       <Text style={styles.inscriptionText}>Inscription</Text>
       
       <View style={styles.textinputView}>
-          <TextInput placeholder = "Nom d'utilisateur" style={styles.styleText} onChangeText={(text)=> setUsername(text)}/>
+
+
+
+
+
+
+
+
+
+
+        
+
+         
+            
+          <View style = {{alignItems : 'center'}}>
+            {spellcheckusrn, minstr ? <Text>erreur, veuillez entrer un nom d'utilisateur ne contenant pas de caractère spéciaux et de minimum 4 caractères</Text> : null}
+          </View> 
+                    
+
+          <TextInput placeholder = "Nom d'utilisateur" style={styles.styleText} onChangeText={(text)=> setUsername(text) }/>
+          
+
           <TextInput placeholder = "Nom" style={styles.styleText} onChangeText={(text)=> setLastname(text)}/>
           <TextInput placeholder = "Prénom" style={styles.styleText} onChangeText={(text)=> setFirstname(text)}/>
           <TextInput placeholder = "Sexe" style={styles.styleText} onChangeText={(text)=> setSex(text)}/>
           <TextInput placeholder = "Adresse email" style={styles.styleText} onChangeText={(text)=> setEmail(text)}/>
-          <TextInput placeholder = "Mot de passe" style={styles.styleText} onChangeText={(text)=> setPassword(text)}/>
-          <TextInput placeholder = "Corfirmer le mot de passe" style={styles.styleText}/>
-          <TextInput placeholder = "Taille" style={styles.styleText}/>
-          <TextInput placeholder = "Poids" style={styles.styleText}/>
+
+
+          <View style = {{alignItems : 'center'}}>
+            {passwcheck ? <Text>erreur, les mots de passe ne sont pas identiques</Text> : null}
+          </View>
+
+         <TextInput placeholder = "Mot de passe" style={styles.styleText} onChangeText={(text)=> setPassword(text)} secureTextEntry={true}/>
+          
+          <View style = {{alignItems : 'center'}}>
+            {passwcheck && password_u.length > 8 ? <Text>erreur, les mots de passe ne sont pas identiques ou font moins de 8 caractères</Text> : null}
+          </View>
+
+        <TextInput placeholder = "Corfirmer le mot de passe" style={styles.styleText} onChangeText={(text)=> setPasswordv(text)} secureTextEntry={true}/>
+          
           <TextInput placeholder = "Date de naissance" style={styles.styleText} onChangeText={(text)=> setBirth(text)}/>
           <TextInput placeholder = "Doctorcode" style={styles.styleText} onChangeText={(text)=> setDoctorcode(text)}/>
           <TextInput placeholder = "Numéro de téléphone" style={styles.styleText} onChangeText={(text)=> setPhone(text)}/>
@@ -60,6 +111,7 @@ function SignUpScrollview({ navigation }) {
         />
       </View>
     </TouchableOpacity>
+
       </View>
 
       </View>
@@ -69,7 +121,9 @@ function SignUpScrollview({ navigation }) {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+      setModalVisible(!modalVisible);
+
+          
         }}
       >
         <View>
@@ -90,7 +144,14 @@ function SignUpScrollview({ navigation }) {
 
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
+              onPress={() => 
+              {setModalVisible(!modalVisible);
+                    
+      strtobe(alpha,username_u);
+      passwchecker(password_u, password_uv);
+      minstrtobe(username_u);
+              }
+              }>
 
               <Text style={styles.textStyle}>Fermer</Text>
             </Pressable>
@@ -105,37 +166,33 @@ function SignUpScrollview({ navigation }) {
       </Pressable>
 
       
+<View>
 
-      <Button title ="S'inscrire" onPress={()=> 
-    axios.post('http://takecare.southcentralus.cloudapp.azure.com/api/users/profils', {
-  username: username_u,
-  firstname: firstname_u,
-  lastname: lastname_u,
-  email: email_u,
-  birth: birth_u,
-  password: password_u,
-  phone: phone_u,
-  sex: sex_u,
-  iddoctor: doctorcode_u,
+  
+{spellcheckusrn == false && minstr == false && passwcheck == false && email_u != null ? <Button title = "s'inscrire" onPress={()=>
+    axios.post('http://takecare.southcentralus.cloudapp.azure.com/signup', {
+      
+    "email": email_u,
+    "password": password_u,
+    "username": username_u,
+    "profile": {
+        "firstname": firstname_u,
+        "lastname": lastname_u,
+        "phone": phone_u,
+        "birth": birth_u,
+        "sex": sex_u,
+        "iddoctor": doctorcode_u
+    }
+
   })
+  }/> : null}
 
-  }/>
+<Button title = "GET USERNAME"/>
+</View>
+      
 
 
-   <Button title ="S'inscrire meth 2" onPress={()=> 
-    axios.post('http://takecare.southcentralus.cloudapp.azure.com/api/users/$set', {
-  username: username_u,
-  firstname: firstname_u,
-  lastname: lastname_u,
-  email: email_u,
-  birth: birth_u,
-  password: password_u,
-  phone: phone_u,
-  sex: sex_u,
-  iddoctor: doctorcode_u,
-  })
-  }
-/>
+
 
     </ScrollView>
     </SafeAreaView>
