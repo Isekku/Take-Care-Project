@@ -13,7 +13,7 @@ function AvatarScreen({ navigation }) {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+          alert('Désoler, nous devons avoir accès à votre galerie pour pouvoir continuer.');
         }
       }
     })();

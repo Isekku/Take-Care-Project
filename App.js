@@ -18,6 +18,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import { AuthContext } from './components/context'; 
 import RootStackScreen from './components/RootStackScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Users from './models/users';
 
 
 const Stack = createStackNavigator();
@@ -38,33 +39,33 @@ const initialLoginState = {
     userToken: null,
   };
 
-  loginReducer = (prevState, action) => {
+  const loginReducer = (prevState, action) => {
     switch( action.type ) {
-      case 'RETRIEVE_TOKEN':
-        return{
-          ... prevState,
-          userToke: action.token,
+      case 'RETRIEVE_TOKEN': 
+        return {
+          ...prevState,
+          userToken: action.token,
           isLoading: false,
         };
-      case 'LOGIN':
-        return{
-          ... prevState,
+      case 'LOGIN': 
+        return {
+          ...prevState,
           userName: action.id,
-          userToke: action.token,
+          userToken: action.token,
           isLoading: false,
         };
-      case 'LOGOUT':
-        return{
-          ... prevState,
+      case 'LOGOUT': 
+        return {
+          ...prevState,
           userName: null,
           userToken: null,
           isLoading: false,
         };
-      case 'REGISTER':
-        return{
-          ... prevState,
+      case 'REGISTER': 
+        return {
+          ...prevState,
           userName: action.id,
-          userToke: action.token,
+          userToken: action.token,
           isLoading: false,
         };
     }
@@ -100,6 +101,9 @@ const initialLoginState = {
     signUp: () => {
       // setUserToken('fgkj');
       // setIsLoading(false);
+    },
+    toggleTheme: () => {
+      setIsDarkTheme( isDarkTheme => !isDarkTheme );
     }
   }), []);
 
