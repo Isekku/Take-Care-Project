@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Avatar, Divider } from 'react-native-paper';
+import { Avatar, Divider, Button, IconButton, Colors  } from 'react-native-paper';
 import { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image, Button } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Users from "../models/users";
 
 function AvatarScreen({ navigation }) {
     const [image, setImage] = useState(null);
@@ -39,14 +41,33 @@ function AvatarScreen({ navigation }) {
         <View style={styles.avatarView}>
 
             <View style={styles.avatarIcon}>
-            {image && <Avatar.Image source={{ uri: image }} size={250} style={{backgroundColor : '#000'}}/>}
+              <Avatar.Image size={250} style={{position: 'absolute', backgroundColor: "#BCFCE4",}}/>
+            {image && <Avatar.Image source={{ uri: image }} size={250} style={{backgroundColor: "#BCFCE4",}}/>}
             </View>
 
         </View>
 
           <Divider style={{height : 2, backgroundColor : '#BBB', marginLeft : 40, marginRight : 40 }}/>
         <View style={styles.descriptionView}>
-            <Button title="Modifier la photo" onPress={pickImage} />
+
+
+          <View style={styles.formView}>
+
+          <Text style={styles.textForm}>Nom :</Text>
+          <Text style={styles.textForm}>Prénom :</Text>
+          <Text style={styles.textForm}>Adresse email :</Text>
+          </View>
+
+            <View style={styles.buttonView}>
+              <Button mode='contained' style={styles.imageButton} onPress={pickImage}><Text style={styles.textButton}>Modifier l'image</Text></Button>
+              <IconButton
+            icon="chevron-left"
+            color="#84F8CD"
+            size={70}
+            style={{position: 'absolute', left: 0}}
+            onPress={() => navigation.goBack()}
+            />
+            </View>
         </View>
 
 
@@ -60,6 +81,7 @@ const styles = StyleSheet.create ({
     },
     avatarView : {
         flex : 1,
+        margin: "10%",
     },
     descriptionView : {
         flex : 1,
@@ -71,6 +93,31 @@ const styles = StyleSheet.create ({
     avatarCircle : {
         alignItems : 'center'
 
+    },
+    textForm : {
+      fontSize : 20,
+      color : "#8B8B8B",
+      paddingTop: 30,
+    },
+    formView : {
+      flex: 3,
+      paddingLeft : '10%'
+    },
+    buttonView : {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    imageButton : {
+      backgroundColor: '#BCFCE4',
+      width: 200,
+      borderRadius: 100,
+    },
+    textButton : {
+      color: "#8B8B8B",
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center'
     }
 })
 export default AvatarScreen;

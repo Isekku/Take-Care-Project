@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#717171",
     textAlign: 'center', 
-    marginTop : "60%"
+    marginTop: "10%"
   }, 
   EmailInput : {
         textAlign: 'left',

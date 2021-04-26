@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
     height: 50,
     color: "#767676",
-    marginTop: "40%"
+    marginTop: "10%"
   },
   Patient : {
     flex : 1,
