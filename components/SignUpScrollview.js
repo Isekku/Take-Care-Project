@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios'
 
+import HomeScreen from './HomeScreen'
 
 
 function SignUpScrollview({ navigation }) {
@@ -22,6 +23,7 @@ function SignUpScrollview({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false)
   const [spellcheckusrn, setSpellcheckusrn] = useState(false)
   const [passwcheck, setPasswcheck] = useState()
+  const [sexcheck, setSexcheck] = useState()
   const [usrn, setUsrn] = useState()
   const [signupvisible, setSignupvisible] = useState()
   
@@ -34,9 +36,8 @@ function SignUpScrollview({ navigation }) {
 
 
 
-  function strtobe(strtob, strtotest){
+  function strtobe(strtob, strtotest, strinterdit){
     strtob.test(strtotest) ? setSpellcheckusrn(false): setSpellcheckusrn(true)
-
   }
 
   function minstrtobe(str){
@@ -46,10 +47,11 @@ function SignUpScrollview({ navigation }) {
   function passwchecker(passw, verifypassw){
     passw != verifypassw ? setPasswcheck(true) : setPasswcheck(false)
   }
-  function globalcheck(){
-    spellcheckusrn == false && minstr == false && passwcheck == false ? setSignupvisible(true): setSignupvisible(false)
-  }
 
+
+  function sexchecker(sexu){
+     sexu != "Homme"||"Femme" ? setSexcheck(true) : setSexcheck(false)
+  }
     return (
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -73,7 +75,7 @@ function SignUpScrollview({ navigation }) {
          
             
           <View style = {{alignItems : 'center'}}>
-            {spellcheckusrn, minstr ? <Text>erreur, veuillez entrer un nom d'utilisateur ne contenant pas de caractère spéciaux et de minimum 4 caractères</Text> : null}
+            {spellcheckusrn, minstr ? <Text style ={styles.errortext}>erreur, veuillez entrer un nom d'utilisateur ne contenant pas de caractère spéciaux et de minimum 4 caractères</Text> : null}
           </View> 
                     
 
@@ -82,18 +84,22 @@ function SignUpScrollview({ navigation }) {
 
           <TextInput placeholder = "Nom" style={styles.styleText} onChangeText={(text)=> setLastname(text)}/>
           <TextInput placeholder = "Prénom" style={styles.styleText} onChangeText={(text)=> setFirstname(text)}/>
+
+            <View style = {{alignItems : 'center'}}>
+            {sexcheck ? <Text style ={styles.errortext}>erreur, veuillez entrer un sexe "Homme" ou "Femme"</Text> : null}
+          </View> 
           <TextInput placeholder = "Sexe" style={styles.styleText} onChangeText={(text)=> setSex(text)}/>
           <TextInput placeholder = "Adresse email" style={styles.styleText} onChangeText={(text)=> setEmail(text)}/>
 
 
           <View style = {{alignItems : 'center'}}>
-            {passwcheck ? <Text>erreur, les mots de passe ne sont pas identiques</Text> : null}
+            {passwcheck ? <Text style = {styles.errortext}>erreur, les mots de passe ne sont pas identiques</Text> : null}
           </View>
 
          <TextInput placeholder = "Mot de passe" style={styles.styleText} onChangeText={(text)=> setPassword(text)} secureTextEntry={true}/>
           
           <View style = {{alignItems : 'center'}}>
-            {passwcheck && password_u.length > 8 ? <Text>erreur, les mots de passe ne sont pas identiques ou font moins de 8 caractères</Text> : null}
+            {passwcheck && password_u.length > 8 ? <Text style = {styles.errortext}>erreur, les mots de passe ne sont pas identiques ou font moins de 8 caractères</Text> : null}
           </View>
 
         <TextInput placeholder = "Corfirmer le mot de passe" style={styles.styleText} onChangeText={(text)=> setPasswordv(text)} secureTextEntry={true}/>
@@ -103,14 +109,7 @@ function SignUpScrollview({ navigation }) {
           <TextInput placeholder = "Numéro de téléphone" style={styles.styleText} onChangeText={(text)=> setPhone(text)}/>
           
 
-    <TouchableOpacity onPress={() => navigation.navigate("Accueil")} style={styles.goInscriptionButton}> 
-      <View style={styles.centerbutton}>
-        <Image
-        style={styles.goInscriptionArrow}
-        source={require("../assets/fleche_avant.png")}
-        />
-      </View>
-    </TouchableOpacity>
+
 
       </View>
 
@@ -150,6 +149,7 @@ function SignUpScrollview({ navigation }) {
       strtobe(alpha,username_u);
       passwchecker(password_u, password_uv);
       minstrtobe(username_u);
+      sexchecker(sex_u);
               }
               }>
 
@@ -165,12 +165,13 @@ function SignUpScrollview({ navigation }) {
         <Text style={styles.textStyle}>Vérifier les informations</Text>
       </Pressable>
 
-      
+
 <View>
 
-  
-{spellcheckusrn == false && minstr == false && passwcheck == false && email_u != null ? <Button title = "s'inscrire" onPress={()=>
-    axios.post('http://takecare.southcentralus.cloudapp.azure.com/signup', {
+
+{spellcheckusrn == false && minstr == false && passwcheck == false && email_u != null && sexcheck == false ? 
+
+    <TouchableOpacity title = "Patient" onPress={() => axios.post('http://takecare.southcentralus.cloudapp.azure.com/signup', {
       
     "email": email_u,
     "password": password_u,
@@ -184,14 +185,23 @@ function SignUpScrollview({ navigation }) {
         "iddoctor": doctorcode_u
     }
 
-  })
-  }/> : null}
+  })} style={styles.SignUpB}> 
+    <Text style={styles.patientText}>s'inscrire</Text>
+</TouchableOpacity>
+: null}
 
-<Button title = "GET USERNAME"/>
+
 </View>
       
 
-
+      <TouchableOpacity onPress={() => navigation.navigate("Accueil")} style={styles.goInscriptionButton}> 
+      <View>
+        <Image
+        style={styles.goInscriptionArrow}
+        source={require("../assets/fleche_avant.png")}
+        />
+      </View>
+      </TouchableOpacity>
 
 
     </ScrollView>
@@ -247,26 +257,52 @@ function SignUpScrollview({ navigation }) {
     elevation: 5,
   },
   button: {
+    marginTop : "10%",
     borderRadius: 20,
     padding: 10,
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#84F8CD",
+    padding : 10,
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#84F8CD",
+    padding : 10
   },
   textStyle: {
-    color: "white",
+    color: "#707070",
     fontWeight: "bold",
     textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
+  SignUpB : {
+    flex : 1,
+    borderWidth:1,
+    alignItems:'center',
+    justifyContent : 'center',
+    padding: 10,
+    marginTop: "7%",
+    marginLeft : "15%",
+    marginRight : "15%",
+    marginBottom : "10%",
+    borderRadius:50,
+    backgroundColor: "#84F8CD",
+    borderColor: "#A7F9DA",
+  },
+  patientText : {
+    fontSize: 30,
+    color: "#707070"
+  },
+  errortext : {
+    color : "red",
+    textAlign : 'center'
 
+    
+  }
   
 });
 
