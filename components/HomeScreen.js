@@ -1,12 +1,13 @@
 import * as React from 'react';
-import {  Header, BottomNavigation } from 'react-native-elements';
+import {  Header } from 'react-native-elements';
 import { Text, View, TouchableOpacity, StyleSheet, Image, } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-function HomeScreen({ navigation }) {
+const HomeScreen = ({ navigation }) => {
+
     return (
         <View style={{flex: 1}}>
             <Header
@@ -31,15 +32,41 @@ function HomeScreen({ navigation }) {
             </TouchableOpacity>
             }/>
 
-            <View>
+            <View style={styles.principalStyle}>
+                
+                <View style={styles.imageStyle}>
+            <Image
+                style={styles.jennyStyle}
+                source={require("../assets/jenny.png")}
+            />
+            </View>
+
+            <View style={styles.bottomStyle}>
 
             </View>
 
-            <View>
-                <Text></Text>
             </View>
+
+            
 
         </View>
     )}
+
+    const styles = StyleSheet.create ({
+        principalStyle : {
+            flex : 1,
+        },
+        imageStyle : {
+            flex : 4,
+        },
+        bottomStyle : {
+            flex : 1,
+            backgroundColor: '#84F8CD'
+        },
+        jennyStyle : {
+            height: 600,
+            width : 400
+        },
+    })
 
   export default HomeScreen;

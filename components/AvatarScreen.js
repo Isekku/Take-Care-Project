@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Users from "../models/users";
+import userprofile from "../models/userprofile";
 
 function AvatarScreen({ navigation }) {
     const [image, setImage] = useState(null);
@@ -53,9 +53,9 @@ function AvatarScreen({ navigation }) {
 
           <View style={styles.formView}>
 
-          <Text style={styles.textForm}>Nom :</Text>
-          <Text style={styles.textForm}>Prénom :</Text>
-          <Text style={styles.textForm}>Adresse email :</Text>
+          <Text style={styles.textForm}>Nom : <Text style={styles.profilStyle}>{userprofile.firstname}</Text></Text>
+          <Text style={styles.textForm}>Prénom : <Text style={styles.profilStyle}>{userprofile.name}</Text></Text>
+          <Text style={styles.textForm}>Adresse email : <Text style={styles.profilStyle}>{userprofile.email}</Text></Text>
           </View>
 
             <View style={styles.buttonView}>
@@ -118,6 +118,9 @@ const styles = StyleSheet.create ({
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center'
+    },
+    profilStyle : {
+      color : "#5FB696"
     }
 })
 export default AvatarScreen;
