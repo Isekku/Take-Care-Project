@@ -7,4 +7,9 @@
 
 Malheureusement, le projet est terminé et n'aura pas de suite. Certaines fonctionnalités sont disponibles dans l'application mais ne vous attendez pas à une suite. Mais ça a été un très grand plaisir pour nous de faire le projet.
 
+Contributeur du projet :
+@Isekku
+@SaPhSB
+Joshua Touboul-Rosette
+
 > Take Care Project
